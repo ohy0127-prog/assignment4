@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import DownloadButton from './DownloadButton';
 
 function fmtKST(iso) {
   if (!iso) return '—';
@@ -106,7 +107,10 @@ export default function BoardClient() {
         <button onClick={load} disabled={loading}>{loading ? '조회 중…' : '다시 시도'}</button>
       </div>
 
-      <h3>일별 기록 ({daily_readings.length}건) · 전일 대비</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+        <h3 style={{ margin: 0 }}>일별 기록 ({daily_readings.length}건) · 전일 대비</h3>
+        <DownloadButton rows={daily_readings} />
+      </div>
       {daily_readings.length === 0 ? (
         <p style={{ color: 'var(--muted)' }}>아직 실제 날짜 기록이 없습니다.</p>
       ) : (
